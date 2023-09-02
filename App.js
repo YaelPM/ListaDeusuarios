@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import MainScreen from './screens/MainScreen';
+import UserDetailsScreen from './screens/UserDetailsScreen'; // Asegúrate de importar la pantalla UserDetailsScreen
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const AppNavigator = createStackNavigator(
+  {
+    Home: MainScreen,
+    UserDetails: UserDetailsScreen,
   },
-});
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+const AppContainer = createAppContainer(AppNavigator);
+
+const App = () => {
+  return (
+    <SafeAreaProvider>
+      <AppContainer />
+    </SafeAreaProvider>
+  );
+};
+
+export default App;
+
+
